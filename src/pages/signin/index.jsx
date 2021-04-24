@@ -1,16 +1,43 @@
 import React from "react";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
 import LoginContainer from "../../containers/LoginContainer";
-import Input from "../../components/Input";
+
+const errorsMessages = {
+  required: "Este campo es requerido",
+};
 
 export default function SignupPage() {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
+  const onSubmit = (values) => console.log(values);
   return (
     <LoginContainer>
       <h1>Bienvenido</h1>
-      <form>
-        <Input name="username" label="Correo o Nombre de Usuario" />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label>
+          Correo
+          <input
+            type="email"
+            {...register("email", {
+              required: errorsMessages.required,
+            })}
+          />
+          {errors.email && <div>{errors.email.message}</div>}
+        </label>
 
-        <Input name="password" label="Contraseña" />
+        <label>
+          Contraseña
+          <input
+            {...register("password", {
+              required: errorsMessages.required,
+            })}
+          />
+          {errors.password && <div>{errors.password.message}</div>}
+        </label>
 
         <button type="submit">Iniciar sesión</button>
       </form>
