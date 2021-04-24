@@ -4,41 +4,17 @@ import Header from "../../components/Header";
 import ProductItem from "../../components/ProductItem";
 import styles from "./CommercePage.module.css";
 
-const PRODUCTS = [
-  {
-    id: 1,
-    name: "Pollo frito",
-    description:
-      "Lorem ipsum Choices.js is a lightweight, configurable select box/text input plugin.",
-    price: 10,
-  },
-  {
-    id: 2,
-    name: "Pollo a la brasa",
-    description:
-      "Lorem ipsum Choices.js is a lightweight, configurable select box/text input plugin.",
-    price: 7,
-  },
-  {
-    id: 3,
-    name: "Pollo picante",
-    description:
-      "Lorem ipsum Choices.js is a lightweight, configurable select box/text input plugin.",
-    price: 9,
-  },
-  {
-    id: 4,
-    name: "Alitas de pollo",
-    description:
-      "Lorem ipsum Choices.js is a lightweight, configurable select box/text input plugin.",
-    price: 5,
-  },
-];
+import { getOneCommerce } from "../../lib/api";
 
 function CommercePage({ commerceData, error }) {
   const { addToCart } = useCart();
   if (error) {
-    return <div>Ha ocurrido un error: {error.message}</div>;
+    console.log(error);
+    return (
+      <div>
+        Ha ocurrido un error: <div>{error.message}</div>
+      </div>
+    );
   }
   return (
     <>
@@ -60,7 +36,7 @@ function CommercePage({ commerceData, error }) {
         </div>
         <div className={styles.commerceBody}>
           <div className={styles.container}>
-            {PRODUCTS.map((elem, index) => {
+            {commerceData.products.map((elem, index) => {
               const product = { ...elem, id: `${commerceData.id}-${index}` };
               return (
                 <ProductItem
@@ -80,16 +56,15 @@ function CommercePage({ commerceData, error }) {
 CommercePage.getInitialProps = async (ctx) => {
   try {
     const { commerceId } = ctx.query;
+    const response = await getOneCommerce(commerceId);
 
-    const commerceData = {
-      id: commerceId,
-      name: commerceId.toUpperCase(),
-      description:
-        "Lorem ipsum Choices.js is a lightweight, configurable select box/text input plugin.",
-    };
+    console.log(response);
+
+    const commerceData = { ...response };
 
     return { commerceData };
   } catch (error) {
+    console.error(error);
     return { error };
   }
 };

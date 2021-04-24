@@ -1,5 +1,6 @@
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
+import { getCommerces } from "../lib/api";
 
 const categories = [
   {
@@ -64,4 +65,12 @@ export default function Home() {
       </footer>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const response = await getCommerces();
+  const stores = response.data;
+
+  // Pass data to the page via props
+  return { props: { stores } };
 }
