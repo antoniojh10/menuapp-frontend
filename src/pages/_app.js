@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { AuthProvider } from "../hooks/useAuth";
 import { CartProvider } from "../hooks/useCart";
 import "../styles/globals.css";
 
@@ -32,9 +33,11 @@ export default function MyApp({ Component, pageProps }) {
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         <meta name="theme-color" content="#317EFB" />
       </Head>
-      <CartProvider>
-        <Component {...pageProps} />
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <Component {...pageProps} />
+        </CartProvider>
+      </AuthProvider>
     </>
   );
 }

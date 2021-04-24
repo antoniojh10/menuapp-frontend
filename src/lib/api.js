@@ -33,3 +33,17 @@ export const getOneCommerce = async (domainName) => {
   });
   return commerce;
 };
+
+export const login = async (identifier, password) => {
+  try {
+    const response = await axios.post(`${baseUrl}/auth/local`, {
+      identifier,
+      password,
+    });
+
+    const { user, jwt } = response.data;
+    return { user, jwt };
+  } catch (error) {
+    return { error: error.response.data.message[0].messages[0].message };
+  }
+};
