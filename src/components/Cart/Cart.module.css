@@ -32,10 +32,4 @@
     right: -380px;
     width: 380px;
   }
-  .cart ul {
-    display: flex;
-  }
-  .cart li {
-    margin: 0 0.5rem;
-  }
 }

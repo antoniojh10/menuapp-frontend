@@ -7,3 +7,18 @@
 .cartItem img {
   max-width: 4rem;
 }
+
+.cartItem div {
+  display: flex;
+  align-items: center;
+}
+.cartItem button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 0.4;
+}
+
+.cartItem h3 {
+  max-width: 7rem;
+}

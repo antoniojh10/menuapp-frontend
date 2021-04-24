@@ -6,13 +6,13 @@ import styles from "./Cart.module.css";
 
 export default function Cart() {
   const [showNav, setShowNav] = useState(false);
-  const { cart } = useCart();
+  const { cart, oneMore, oneLess } = useCart();
 
   const toggleMenu = () =>
     showNav ? `${styles.cart} ${styles.active}` : styles.cart;
 
   const totalPrice = () => {
-    return cart.reduce((a, b) => a + b.price, 0);
+    return cart.reduce((a, b) => a + b.price * b.quantity, 0);
   };
 
   return (
@@ -24,7 +24,12 @@ export default function Cart() {
         <h2>Tu pedido</h2>
         <ul>
           {cart.map((product) => (
-            <CartItem key={product.id} {...product} />
+            <CartItem
+              key={product.id}
+              {...product}
+              onMore={() => oneMore(product.id)}
+              onLess={() => oneLess(product.id, product.quantity)}
+            />
           ))}
         </ul>
         <h4>Costo total: ${totalPrice()}</h4>
