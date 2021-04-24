@@ -17,39 +17,36 @@ function CommercePage({ commerceData, error }) {
     );
   }
   return (
-    <>
-      <Header />
-      <main className={styles.main}>
-        <div className={styles.commerceHeader}>
-          <div className={styles.container}>
-            {commerceData.image ? (
-              <img src={commerceData.image} alt={commerceData.name} />
-            ) : (
-              <img
-                src="../../assets/placeholder-food.png"
-                alt={commerceData.name}
+    <main className={styles.main}>
+      <div className={styles.commerceHeader}>
+        <div className={styles.container}>
+          {commerceData.image ? (
+            <img src={commerceData.image} alt={commerceData.name} />
+          ) : (
+            <img
+              src="../../assets/placeholder-food.png"
+              alt={commerceData.name}
+            />
+          )}
+          <h1>{commerceData.name}</h1>
+          <p>{commerceData.description}</p>
+        </div>
+      </div>
+      <div className={styles.commerceBody}>
+        <div className={styles.container}>
+          {commerceData.products.map((elem, index) => {
+            const product = { ...elem, id: `${commerceData.id}-${index}` };
+            return (
+              <ProductItem
+                key={product.id}
+                {...product}
+                onAddCart={() => addToCart(product)}
               />
-            )}
-            <h1>{commerceData.name}</h1>
-            <p>{commerceData.description}</p>
-          </div>
+            );
+          })}
         </div>
-        <div className={styles.commerceBody}>
-          <div className={styles.container}>
-            {commerceData.products.map((elem, index) => {
-              const product = { ...elem, id: `${commerceData.id}-${index}` };
-              return (
-                <ProductItem
-                  key={product.id}
-                  {...product}
-                  onAddCart={() => addToCart(product)}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </main>
-    </>
+      </div>
+    </main>
   );
 }
 

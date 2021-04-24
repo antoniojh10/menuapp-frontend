@@ -25,7 +25,7 @@ const categories = [
   },
 ];
 
-export default function Home() {
+export default function Home({ stores }) {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -44,6 +44,17 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
+          {stores.map((store) => (
+            <Link href={`/${store.domainName}`}>
+              <a key={store.domainName} className={styles.card}>
+                <h3>{store.name}</h3>
+                <p>{store.description}</p>
+              </a>
+            </Link>
+          ))}
+        </div>
+
+        <div className={styles.grid}>
           {categories.map((category) => (
             <a key={category.title} href={category.src} className={styles.card}>
               <h3>{category.title}</h3>
@@ -52,17 +63,6 @@ export default function Home() {
           ))}
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   );
 }

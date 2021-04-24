@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { AuthProvider } from "../hooks/useAuth";
 import { CartProvider } from "../hooks/useCart";
+import Layout from "../containers/Layout";
 import "../styles/globals.css";
 
 export default function MyApp({ Component, pageProps }) {
@@ -35,7 +36,9 @@ export default function MyApp({ Component, pageProps }) {
       </Head>
       <AuthProvider>
         <CartProvider>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </CartProvider>
       </AuthProvider>
     </>
