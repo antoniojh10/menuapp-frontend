@@ -1,4 +1,5 @@
 import styles from "../styles/Home.module.css";
+import Link from "next/link";
 
 const categories = [
   {
@@ -28,12 +29,17 @@ export default function Home() {
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Bienvenido a <a href="#">Ordenando</a>
+          Bienvenido a{" "}
+          <Link href="/ordenando">
+            <a>Ordenando</a>
+          </Link>
         </h1>
 
         <p className={styles.description}>
           ¿Quieres registrar tu negocio?{" "}
-          <code className={styles.code}>Empieza aquí</code>
+          <Link href="/signin">
+            <a className={styles.code}>Empieza aquí</a>
+          </Link>
         </p>
 
         <div className={styles.grid}>
