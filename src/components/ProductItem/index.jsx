@@ -1,7 +1,13 @@
 import React from "react";
 import styles from "./ProductItem.module.css";
 
-export default function ProductItem({ name, image, description, price }) {
+export default function ProductItem({
+  name,
+  image,
+  description,
+  price,
+  onAddCart,
+}) {
   return (
     <div className={styles.card}>
       <h3>{name}</h3>
@@ -13,7 +19,7 @@ export default function ProductItem({ name, image, description, price }) {
       <p>{description}</p>
       <div className={styles.actions}>
         <span>${price}</span>
-        <button>Agregar al carrito</button>
+        <button onClick={onAddCart}>Agregar al carrito</button>
       </div>
     </div>
   );

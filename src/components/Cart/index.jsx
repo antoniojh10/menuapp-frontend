@@ -1,74 +1,18 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { FaShoppingCart, FaWhatsapp } from "react-icons/fa";
+import { useCart } from "../../hooks/useCart";
 import CartItem from "../CartItem";
 import styles from "./Cart.module.css";
 
-const PRODUCTS = [
-  {
-    id: "cart-item-1",
-    name: "Pollo a la brasa",
-    price: 10,
-    image: "../../assets/placeholder-food.png",
-  },
-  {
-    id: "cart-item-2",
-    name: "Pollo a la brasa",
-    price: 10,
-    image: "../../assets/placeholder-food.png",
-  },
-  {
-    id: "cart-item-3",
-    name: "Pollo a la brasa",
-    price: 10,
-    image: "../../assets/placeholder-food.png",
-  },
-  {
-    id: "cart-item-4",
-    name: "Pollo a la brasa",
-    price: 10,
-    image: "../../assets/placeholder-food.png",
-  },
-  {
-    id: "cart-item-5",
-    name: "Pollo a la brasa",
-    price: 10,
-    image: "../../assets/placeholder-food.png",
-  },
-  {
-    id: "cart-item-6",
-    name: "Pollo a la brasa",
-    price: 10,
-    image: "../../assets/placeholder-food.png",
-  },
-  {
-    id: "cart-item-7",
-    name: "Pollo a la brasa",
-    price: 10,
-    image: "../../assets/placeholder-food.png",
-  },
-  {
-    id: "cart-item-8",
-    name: "Pollo a la brasa",
-    price: 10,
-    image: "../../assets/placeholder-food.png",
-  },
-  {
-    id: "cart-item-9",
-    name: "Pollo a la brasa",
-    price: 10,
-    image: "../../assets/placeholder-food.png",
-  },
-];
-
 export default function Cart() {
   const [showNav, setShowNav] = useState(false);
+  const { cart } = useCart();
 
   const toggleMenu = () =>
     showNav ? `${styles.cart} ${styles.active}` : styles.cart;
 
   const totalPrice = () => {
-    return PRODUCTS.reduce((a, b) => a + b.price, 0);
+    return cart.reduce((a, b) => a + b.price, 0);
   };
 
   return (
@@ -79,7 +23,7 @@ export default function Cart() {
       <nav className={toggleMenu()}>
         <h2>Tu pedido</h2>
         <ul>
-          {PRODUCTS.map((product) => (
+          {cart.map((product) => (
             <CartItem key={product.id} {...product} />
           ))}
         </ul>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useCart } from "../../hooks/useCart";
 import Header from "../../components/Header";
 import ProductItem from "../../components/ProductItem";
 import styles from "./CommercePage.module.css";
@@ -13,28 +14,29 @@ const PRODUCTS = [
   },
   {
     id: 2,
-    name: "Pollo frito",
+    name: "Pollo a la brasa",
     description:
       "Lorem ipsum Choices.js is a lightweight, configurable select box/text input plugin.",
-    price: 10,
+    price: 7,
   },
   {
     id: 3,
-    name: "Pollo frito",
+    name: "Pollo picante",
     description:
       "Lorem ipsum Choices.js is a lightweight, configurable select box/text input plugin.",
-    price: 10,
+    price: 9,
   },
   {
     id: 4,
-    name: "Pollo frito",
+    name: "Alitas de pollo",
     description:
       "Lorem ipsum Choices.js is a lightweight, configurable select box/text input plugin.",
-    price: 10,
+    price: 5,
   },
 ];
 
 function CommercePage({ commerceData, error }) {
+  const { addToCart } = useCart();
   if (error) {
     return <div>Ha ocurrido un error: {error.message}</div>;
   }
@@ -58,13 +60,16 @@ function CommercePage({ commerceData, error }) {
         </div>
         <div className={styles.commerceBody}>
           <div className={styles.container}>
-            {PRODUCTS.map((product, index) => (
-              <ProductItem
-                {...product}
-                key={`${commerceData.id}-${index}`}
-                id={`${commerceData.id}-${index}`}
-              />
-            ))}
+            {PRODUCTS.map((elem, index) => {
+              const product = { ...elem, id: `${commerceData.id}-${index}` };
+              return (
+                <ProductItem
+                  key={product.id}
+                  {...product}
+                  onAddCart={() => addToCart(product)}
+                />
+              );
+            })}
           </div>
         </div>
       </main>

@@ -28,9 +28,7 @@
   line-height: 1.5;
 }
 
-.card:hover p,
-.card:focus p,
-.card:active p {
+.card:hover p {
   display: block;
 }
 
