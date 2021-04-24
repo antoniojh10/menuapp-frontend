@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "../../components/Header";
 import styles from "./CommercePage.module.css";
 
 const PRODUCTS = [
@@ -37,44 +38,47 @@ function CommercePage({ commerceData, error }) {
     return <div>Ha ocurrido un error: {error.message}</div>;
   }
   return (
-    <main className={styles.main}>
-      <div className={styles.commerceHeader}>
-        <div className={styles.container}>
-          {commerceData.image ? (
-            <img src={commerceData.image} alt={commerceData.name} />
-          ) : (
-            <img
-              src="../../assets/placeholder-food.png"
-              alt={commerceData.name}
-            />
-          )}
-          <h1>{commerceData.name}</h1>
-          <p>{commerceData.description}</p>
+    <>
+      <Header />
+      <main className={styles.main}>
+        <div className={styles.commerceHeader}>
+          <div className={styles.container}>
+            {commerceData.image ? (
+              <img src={commerceData.image} alt={commerceData.name} />
+            ) : (
+              <img
+                src="../../assets/placeholder-food.png"
+                alt={commerceData.name}
+              />
+            )}
+            <h1>{commerceData.name}</h1>
+            <p>{commerceData.description}</p>
+          </div>
         </div>
-      </div>
-      <div className={styles.commerceBody}>
-        <div className={styles.container}>
-          {PRODUCTS.map((product) => (
-            <div className={styles.card}>
-              <h3>{product.name}</h3>
-              {product.image ? (
-                <img src={product.image} alt={product.name} />
-              ) : (
-                <img
-                  src="../../assets/placeholder-food.png"
-                  alt={product.name}
-                />
-              )}
-              <p>{product.description}</p>
-              <div className={styles.actions}>
-                <span>${product.price}</span>
-                <button>Agregar al carrito</button>
+        <div className={styles.commerceBody}>
+          <div className={styles.container}>
+            {PRODUCTS.map((product) => (
+              <div className={styles.card}>
+                <h3>{product.name}</h3>
+                {product.image ? (
+                  <img src={product.image} alt={product.name} />
+                ) : (
+                  <img
+                    src="../../assets/placeholder-food.png"
+                    alt={product.name}
+                  />
+                )}
+                <p>{product.description}</p>
+                <div className={styles.actions}>
+                  <span>${product.price}</span>
+                  <button>Agregar al carrito</button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
 

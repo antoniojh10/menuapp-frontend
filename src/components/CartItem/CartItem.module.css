@@ -1,0 +1,9 @@
+.cartItem {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cartItem img {
+  max-width: 4rem;
+}
