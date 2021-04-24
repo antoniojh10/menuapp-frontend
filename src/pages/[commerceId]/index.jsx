@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../../components/Header";
+import ProductItem from "../../components/ProductItem";
 import styles from "./CommercePage.module.css";
 
 const PRODUCTS = [
@@ -57,23 +58,12 @@ function CommercePage({ commerceData, error }) {
         </div>
         <div className={styles.commerceBody}>
           <div className={styles.container}>
-            {PRODUCTS.map((product) => (
-              <div className={styles.card}>
-                <h3>{product.name}</h3>
-                {product.image ? (
-                  <img src={product.image} alt={product.name} />
-                ) : (
-                  <img
-                    src="../../assets/placeholder-food.png"
-                    alt={product.name}
-                  />
-                )}
-                <p>{product.description}</p>
-                <div className={styles.actions}>
-                  <span>${product.price}</span>
-                  <button>Agregar al carrito</button>
-                </div>
-              </div>
+            {PRODUCTS.map((product, index) => (
+              <ProductItem
+                {...product}
+                key={`${commerceData.id}-${index}`}
+                id={`${commerceData.id}-${index}`}
+              />
             ))}
           </div>
         </div>
