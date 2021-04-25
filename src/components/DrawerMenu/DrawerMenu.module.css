@@ -1,0 +1,21 @@
+.drawerMenu {
+  position: fixed;
+  top: 3.5rem;
+  right: -100vw;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  color: var(--text-color);
+  text-align: center;
+  transition: all ease 0.2s;
+}
+.drawerMenu.active {
+  right: 0;
+}
+
+@media (min-width: 400px) {
+  .drawerMenu {
+    right: -380px;
+    width: 380px;
+  }
+}
