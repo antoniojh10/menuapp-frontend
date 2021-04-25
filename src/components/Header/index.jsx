@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useAuth } from "../../hooks/useAuth";
 import Cart from "../Cart";
-import DrawerMenu from "../DrawerMenu";
+import UserOptions from "../UserOptions";
 import styles from "./Header.module.css";
 
 const HIDE_CART_ROUTES = ["/", "/signin", "/signup"];
@@ -14,10 +15,10 @@ export default function Header() {
         <Link href="/">
           <a className={styles.logo}>Ordenando</a>
         </Link>
-        <DrawerMenu ToggleContent={() => "Menu"}>
-          <h1>Yo soy un menu</h1>
-        </DrawerMenu>
-        {!HIDE_CART_ROUTES.includes(router.pathname) && <Cart />}
+        <span>
+          <UserOptions />
+          {!HIDE_CART_ROUTES.includes(router.pathname) && <Cart />}
+        </span>
       </div>
     </header>
   );

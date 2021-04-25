@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaShoppingCart, FaWhatsapp } from "react-icons/fa";
 import { useCart } from "../../hooks/useCart";
 import DrawerMenu from "../DrawerMenu";
