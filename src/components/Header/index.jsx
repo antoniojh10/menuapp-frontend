@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useAuth } from "../../hooks/useAuth";
 import Cart from "../Cart";
 import UserOptions from "../UserOptions";
 import styles from "./Header.module.css";

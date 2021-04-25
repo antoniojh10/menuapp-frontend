@@ -6,13 +6,13 @@ import DrawerMenu from "../DrawerMenu";
 // import styles from "./Cart.module.css";
 
 export default function UserOptions() {
-  const { user } = useAuth();
+  const { user, signout } = useAuth();
 
   return user ? (
     <DrawerMenu ToggleContent={() => <FaUserCircle />}>
       <ul>
         <li>
-          <button>Cerrar Sesión</button>
+          <button onClick={() => signout()}>Cerrar Sesión</button>
         </li>
       </ul>
     </DrawerMenu>

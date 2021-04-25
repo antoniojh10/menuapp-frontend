@@ -48,7 +48,8 @@ function useAuthProvider() {
     }
   };
   const signout = () => {
-    // TODO Create logout user function
+    setUser(null);
+    setToken(null);
   };
   const sendPasswordResetEmail = (email) => {
     // TODO Create a reset password function
