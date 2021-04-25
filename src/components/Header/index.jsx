@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Cart from "../Cart";
 import styles from "./Header.module.css";
 
-const HIDE_CART_ROUTES = ["/", "/signin", "signup"];
+const HIDE_CART_ROUTES = ["/", "/signin", "/signup"];
 
 export default function Header() {
   const router = useRouter();
