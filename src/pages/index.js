@@ -31,7 +31,7 @@ export default function Home({ stores }) {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Bienvenido a{" "}
-          <Link href="/ordenando">
+          <Link href="#">
             <a>Ordenando</a>
           </Link>
         </h1>
