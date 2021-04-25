@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../../hooks/useAuth";
 import LoginContainer from "../../containers/LoginContainer";
 
 const errorsMessages = {
@@ -8,17 +10,27 @@ const errorsMessages = {
 };
 
 export default function SignupPage() {
+  const { user, signup, errors: registerError } = useAuth();
+  const router = useRouter();
   const {
     handleSubmit,
     register,
     getValues,
     formState: { errors },
   } = useForm({ mode: "onChange" });
-  const onSubmit = (values) => console.log(values);
+
+  const onSubmit = (values) => {
+    signup(values);
+  };
+
+  useEffect(() => {
+    if (user) router.push("/");
+  }, []);
 
   return (
     <LoginContainer>
       <h1>Regístrate</h1>
+      {registerError && <div>{registerError}</div>}
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>
           Nombres

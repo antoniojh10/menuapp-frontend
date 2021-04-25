@@ -1,6 +1,6 @@
 import { useState, useContext, createContext } from "react";
 import { useRouter } from "next/router";
-import { login } from "../lib/api";
+import { login, register } from "../lib/api";
 
 const authContext = createContext();
 
@@ -30,8 +30,22 @@ function useAuthProvider() {
       router.push("/");
     }
   };
-  const signup = (email, password) => {
-    // TODO Create a register user function
+  const signup = async ({ firstName, lastName, email, username, password }) => {
+    const { user, jwt, error } = await register(
+      firstName,
+      lastName,
+      email,
+      username,
+      password
+    );
+    if (error) {
+      setErrors(error);
+    } else {
+      setErrors(null);
+      setToken(jwt);
+      setUser({ ...user });
+      router.push("/");
+    }
   };
   const signout = () => {
     // TODO Create logout user function

@@ -47,3 +47,25 @@ export const login = async (identifier, password) => {
     return { error: error.response.data.message[0].messages[0].message };
   }
 };
+
+export const register = async (
+  firstName,
+  lastName,
+  email,
+  username,
+  password
+) => {
+  try {
+    const response = await axios.post(`${baseUrl}/auth/local/register`, {
+      firstName,
+      lastName,
+      email,
+      username,
+      password,
+    });
+    const { user, jwt } = response.data;
+    return { user, jwt };
+  } catch (error) {
+    return { error: error.response.data.message[0].messages[0].message };
+  }
+};
