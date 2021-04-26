@@ -12,6 +12,11 @@ export default function UserOptions() {
     <DrawerMenu ToggleContent={() => <FaUserCircle />}>
       <ul>
         <li>
+          <Link href="/create/commerce">
+            <a>Crear Negocio</a>
+          </Link>
+        </li>
+        <li>
           <button onClick={() => signout()}>Cerrar Sesión</button>
         </li>
       </ul>

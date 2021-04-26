@@ -9,7 +9,6 @@ export const printApi = () => {
 export const getCommerces = async () => {
   try {
     const response = await axios.get(`${baseUrl}/stores`);
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
@@ -23,7 +22,7 @@ export const getOneCommerce = async (domainName) => {
   if (data.length === 0) throw { code: 404, message: "Negocio no encontrado" };
   const commerce = {
     ...data[0],
-    image: `${baseUrl}${data[0].logo.url}`,
+    image: data[0].logo?.url && `${baseUrl}${data[0].logo.url}`,
   };
   commerce.products.map((product) => {
     product.image =
@@ -67,5 +66,36 @@ export const register = async (
     return { user, jwt };
   } catch (error) {
     return { error: error.response.data.message[0].messages[0].message };
+  }
+};
+
+export const createCommerce = async ({
+  token,
+  userId,
+  name,
+  domainName,
+  description,
+  telephone,
+}) => {
+  try {
+    const { data } = await axios.post(
+      `${baseUrl}/stores`,
+      {
+        user: userId,
+        name,
+        domainName,
+        description,
+        telephone,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return { data };
+  } catch (error) {
+    console.log(error);
+    return { error };
   }
 };
