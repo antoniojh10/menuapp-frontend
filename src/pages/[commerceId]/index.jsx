@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useCart } from "../../hooks/useCart";
-import Header from "../../components/Header";
 import ProductItem from "../../components/ProductItem";
 import styles from "./CommercePage.module.css";
 
 import { getOneCommerce } from "../../lib/api";
 
 function CommercePage({ commerceData, error }) {
-  const { addToCart } = useCart();
+  const { setActualCommerce, addToCart } = useCart();
+
+  useEffect(() => {
+    setActualCommerce({ ...commerceData });
+  }, [commerceData]);
+
   if (error) {
     console.log(error);
     return (

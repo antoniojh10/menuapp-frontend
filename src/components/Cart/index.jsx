@@ -5,11 +5,28 @@ import DrawerMenu from "../DrawerMenu";
 import CartItem from "../CartItem";
 import styles from "./Cart.module.css";
 
+const storeName = "NOMBRE DE LA TIENDA";
+
 export default function Cart() {
-  const { cart, oneMore, oneLess } = useCart();
+  const { commerce, cart, oneMore, oneLess } = useCart();
 
   const totalPrice = () => {
     return cart.reduce((a, b) => a + b.price * b.quantity, 0);
+  };
+
+  const encodeOrder = () => {
+    let messageStart = `Hola **${commerce.name}**, quiero pedir:`;
+    let order = cart.map(
+      (product) =>
+        `${product.quantity} ${product.name}: $${product.price}x${
+          product.quantity
+        }=${product.price * product.quantity}`
+    );
+    order = [messageStart, ...order, `Total: $${totalPrice()}`];
+    console.log(order);
+    console.log(order.join("\n"));
+    console.log(encodeURIComponent(order.join("\n")));
+    // return encodeURIComponent(order.join("\n"));
   };
 
   return (
@@ -26,9 +43,19 @@ export default function Cart() {
         ))}
       </ul>
       <h4 className={styles.totalPrice}>Costo total: ${totalPrice()}</h4>
-      <button>
+      {/* <a
+        href={`https://wa.me/${commerce.telephone}/?text=${encodeOrder()}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      > */}
+      <button
+        onClick={() => {
+          encodeOrder();
+        }}
+      >
         <FaWhatsapp /> Enviar pedido
       </button>
+      {/* </a> */}
     </DrawerMenu>
   );
 }

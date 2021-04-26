@@ -13,6 +13,11 @@ export const useCart = () => {
 
 function useCartProvider() {
   const [cart, setCart] = useState([]);
+  const [commerce, setCommerce] = useState([]);
+
+  const setActualCommerce = (commerce) => {
+    setCommerce({ ...commerce });
+  };
 
   const addToCart = (product) => {
     const isInCart = cart.some((elem) => elem.id === product.id);
@@ -47,6 +52,8 @@ function useCartProvider() {
   };
 
   return {
+    commerce,
+    setActualCommerce,
     cart,
     addToCart,
     removeFromCart,
