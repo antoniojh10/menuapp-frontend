@@ -5,8 +5,6 @@ import DrawerMenu from "../DrawerMenu";
 import CartItem from "../CartItem";
 import styles from "./Cart.module.css";
 
-const storeName = "NOMBRE DE LA TIENDA";
-
 export default function Cart() {
   const { commerce, cart, oneMore, oneLess } = useCart();
 
@@ -26,7 +24,7 @@ export default function Cart() {
     console.log(order);
     console.log(order.join("\n"));
     console.log(encodeURIComponent(order.join("\n")));
-    // return encodeURIComponent(order.join("\n"));
+    return encodeURIComponent(order.join("\n"));
   };
 
   return (
@@ -43,19 +41,19 @@ export default function Cart() {
         ))}
       </ul>
       <h4 className={styles.totalPrice}>Costo total: ${totalPrice()}</h4>
-      {/* <a
+      <a
         href={`https://wa.me/${commerce.telephone}/?text=${encodeOrder()}`}
         target="_blank"
         rel="noopener noreferrer"
-      > */}
-      <button
+      >
+        {/* <button
         onClick={() => {
           encodeOrder();
         }}
-      >
+      > */}
         <FaWhatsapp /> Enviar pedido
-      </button>
-      {/* </a> */}
+        {/* </button> */}
+      </a>
     </DrawerMenu>
   );
 }
